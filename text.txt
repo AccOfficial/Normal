@@ -1,0 +1,143 @@
+//Create Connection
+package nmitd;
+import java.sql.*;
+import java.sql.DriverManager;
+
+public class ConnectionDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+		DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","admin");
+		System.out.println("Connection Established Successfully");
+		}catch(Exception e)
+		{
+			System.err.println(e);
+		}
+
+	}
+
+}
+
+
+// create connection
+package nmitd;
+
+import java.sql.*;
+import java.sql.DriverManager;
+
+public class CreateDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "admin");
+
+			Statement stmt = con.createStatement();
+
+			stmt.execute("create table student(rollno number(3),name varchar2(20),maeks number(3))");
+			System.out.println("Table Created Successfully");
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+}
+
+//Insert data
+
+package nmitd;
+import java.sql.*;
+public class InsertDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+		Class.forName("oracle.jdbc.OracleDriver");
+		Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "admin");
+		Statement stmt = con.createStatement();
+		//Insert single record
+//		stmt.executeUpdate("insert into student values(1,'Raj',85)");
+//		System.out.println("One record inserted successfully");
+		
+		// Insert Multiple record
+		String insert1="insert into student values(1,'Ram',58)";
+		String insert2="insert into student values(2,'Shyam',68)";
+		String insert3="insert into student values(3,'Mohan',38)";
+		String insert4="insert into student values(4,'Radha',98)";
+		String insert5="insert into student values(5,'Krishna',18)";
+		String insert6="insert into student values(6,'Shiv',78)";
+		
+		stmt.addBatch(insert1);
+		stmt.addBatch(insert2);
+		stmt.addBatch(insert3);
+		stmt.addBatch(insert4);
+		stmt.addBatch(insert5);
+		stmt.addBatch(insert6);
+	}
+		catch(Exception e)
+		{
+			System.out.println(e);
+		}
+
+}
+
+}
+
+// Update data
+
+package nmitd;
+
+import java.sql.*;
+
+public class updateDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "admin");
+//		System.out.println("Connection Established Successfully");
+			Statement stmt = con.createStatement();
+			stmt.executeUpdate("update student set marks=95 where rollno=3");
+			System.out.println("One record update successdully");
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+	}
+
+}
+
+
+//Delete Data
+
+package nmitd;
+
+import java.sql.*;
+
+public class DeleteDemo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class.forName("oracle.jdbc.OracleDriver");
+			Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl", "system", "admin");
+//		System.out.println("Connection Established Successfully");
+			Statement stmt = con.createStatement();
+//			stmt.executeUpdate("update student set marks=95 where rollno=3");
+//			System.out.println("One record update successdully");
+			
+			//Delete the record
+			
+			stmt.executeUpdate("delete from student where rollno=4");
+			
+		} catch (Exception e) {
+			System.err.println(e);
+		}
+
+	}
+
+}
