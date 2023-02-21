@@ -1,0 +1,95 @@
+// Index.html
+<html>
+    <head>
+        <title>JSP Program to find the simple Interest</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1>Enter the following value to find Simple Interest </h1>
+        <br/>
+        <form method="post" action="Interest.jsp">
+            <input type="text" name="amount" placeholder="Amount"/>
+            <input type="text" name="period" placeholder="Period"/>
+            <input type="text" name="rate" placeholder="Rate of Intereset"/>
+            <input type="submit" value="Calculate"/>
+        </form>
+    </body>
+</html>
+
+
+
+
+// Interest.jsp
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Simple Interest Calculate</title>
+    </head>
+    <body>
+        <jsp:useBean id="bean_id" class="BeanPro.calculate" scope="session"/>
+        <%
+            String amount=request.getParameter("amount");
+            int p=Interger.parseInt(amount);
+            bean_id.setP(p);
+            
+            String period = request.getParameter("period");
+            int n = Integer.parseInt(period);
+            bean_id.setN(n);
+            
+            String rate = request.getParameter("rate");
+            int r = Integer.parseInt(rate);
+            bean_id.setR(r);
+            %>
+            
+            <h2>Amount: <%=p%> </h2>
+            <h2>Period: <%=n%> </h2>
+            <h2>Rate of Interest: <%=r%> </h2>
+            <h2>Simple Interest is now: <%=bean_id.getInterest()%> </h2>
+            
+            
+    </body>
+</html>
+
+
+//Calculate.java
+
+package BeanPro;
+
+/**
+ *
+ * @author User
+ */
+public class calculate {
+    public int p,n,r;
+    
+    public calculate() 
+    {
+        p=0;
+        n=0;
+        r=0;
+    }
+    
+    public int getIntereset()
+    {
+        int i =(p*n*r)/100;
+        return i;
+    }
+    public void setP(int p)
+    {
+        this.p=p;
+    }
+    
+    public void setN(int n)
+    {
+        this.n=n;
+    }
+    
+    public void setR(int r)
+    {
+        this.r=r;
+    }
+}
